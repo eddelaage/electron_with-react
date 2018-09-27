@@ -6,10 +6,17 @@ import axios from 'axios'
 
 class App extends Component {
 
+  state = {
+    posts: []
+  }
+
   componentDidMount() {
     axios.get('http://reddit.com/r/aww.json')
     .then(response => {
-      console.log(response)
+      this.setState({
+        posts: response.data.data.children
+      })
+      console.log(response.data.data.children)
     })
     .catch(err => {
       console.log(err)
@@ -20,11 +27,10 @@ class App extends Component {
     return (
       <div className="App">
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">Cras justo odio</li>
-          <li className="list-group-item">Dapibus ac facilisis in</li>
-          <li className="list-group-item">Morbi leo risus</li>
-          <li className="list-group-item">Porta ac consectetur ac</li>
-          <li className="list-group-item">Vestibulum at eros</li>
+          {this.state.posts.map(posts =>
+            <li key={posts.data.id} className="list-group-item">{posts.data.title}</li>
+          )}
+          
         </ul>
       </div>
     );
