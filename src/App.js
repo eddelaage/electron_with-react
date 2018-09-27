@@ -27,10 +27,12 @@ class App extends Component {
     return (
       <div className="App">
         <ul className="list-group list-group-flush">
-          {this.state.posts.map(posts =>
-            <li key={posts.data.id} className="list-group-item">{posts.data.title}</li>
+          {this.state.posts.map(post =>
+            <li key={post.data.id} className="list-group-item flex-container">
+              <img src={post.data.thumbnail} alt="image" className="thumbnail" />
+              <div>{post.data.title}</div>
+            </li>
           )}
-          
         </ul>
       </div>
     );

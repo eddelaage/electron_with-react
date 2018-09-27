@@ -51,3 +51,15 @@
 .list-group-flush:first-child .list-group-item:first-child {
   border-top: 0;
 }
+
+.flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.thumbnail {
+  border-radius: 30px;
+  margin-right: 30px;
+  width: 50px;
+  height: 50px;
+}
