@@ -3,6 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 
 import axios from 'axios'
+// import { ipcRenderer } from 'electron';
+
+const electron = window.require('electron')
+const ipcRenderer = electron.ipcRenderer
 
 class App extends Component {
 
@@ -23,12 +27,20 @@ class App extends Component {
     })
   }
 
+  showImage = (image) => {
+    ipcRenderer.send('toggle-image', image)
+  }
+
   render() {
     return (
       <div className="App">
         <ul className="list-group list-group-flush">
           {this.state.posts.map(post =>
-            <li key={post.data.id} className="list-group-item flex-container">
+            <li 
+              key={post.data.id} 
+              className="list-group-item flex-container" 
+              onClick={() => this.showImage(post.data.preview.images[0].source.url)}
+            >
               <img src={post.data.thumbnail} alt="image" className="thumbnail" />
               <div>{post.data.title}</div>
             </li>
